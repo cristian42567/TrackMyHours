@@ -28,13 +28,65 @@
 
 .inicio-sesion{
     background-color: white;
-    height: 32vh;
-    width: 370px;
+    height: 30vh;
+    width: 340px;
     padding: 10px;
     border-radius: 12px;
     display: flex;
     flex-direction: column;  
     gap: 20px;
     justify-content: center;
+    align-items: center;
 }
 
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+form input{
+    height: 40px;
+    border: none;
+    background-color: #f1f1f1;
+    border-radius: 8px;
+    padding: 0 10px; 
+}
+
+form input:focus {
+    border: 2px solid #2ddb2d;
+    outline: none;
+    background-color: #fffffff1; 
+}
+
+form button{    
+    height: 40px;
+    width: 300px;
+    border: none;
+    background-color: #2ddb2d;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+form:focus{
+    background-color: #2ddb2d;
+}
+
+.registro{
+    height: 40px;
+    width: 300px;
+    border: none;
+    background-color: #3b8545;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.divisor {
+    width: 300px;
+    border: none;
+    border-top: 1px solid #1f3d21; /* Ajusta el margen según sea necesario */
+}
