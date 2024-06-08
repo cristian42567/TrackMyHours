@@ -14,11 +14,27 @@ form{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 500px;
-    height: 350px; 
+    width: 360px;
+    height: 400px; 
     background-color: #ffffff;
-    border-radius: 5px;
+    border-radius: 10px;
     font-size: 1.3rem;
+}
+
+form input{
+    height: 40px;
+    border: none;
+    background-color: #f1f1f1;
+    border-radius: 8px;
+    padding: 0 10px; 
+    margin-bottom: 10px;
+    width: 250px;
+}
+
+form input:focus {
+    border: 2px solid #2ddb2d;
+    outline: none;
+    background-color: #fffffff1; 
 }
 
 .cabecera{
@@ -28,6 +44,7 @@ form{
     align-items: center;
     margin-bottom: 15px;
     font-weight: bold;
+    margin-top: -20px;
 }
 
 .cerrar{
@@ -45,8 +62,20 @@ form{
 }
 
 .divisor {
-    width: 500px;
+    width: 360px;
     border: none;
-    border-top: 1.5px solid #00000071;
+    border-top: 1px solid #1f3d21;
     margin-bottom: 40px;
+}
+
+form button{    
+    height: 40px;
+    width: 200px;
+    border: none;
+    background-color: #2ddb2d;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
 }
