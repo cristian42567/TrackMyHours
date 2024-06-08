@@ -88,5 +88,5 @@ form:focus{
 .divisor {
     width: 300px;
     border: none;
-    border-top: 1px solid #1f3d21; /* Ajusta el margen según sea necesario */
+    border-top: 1px solid #1f3d21;
 }
