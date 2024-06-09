@@ -6,4 +6,9 @@ export const routes: Routes = [
         title: 'HoraFlox - Entrar o registrarse',
         loadComponent: () => import('./layouts/home/home.component').then(m => m.HomeComponent)
     },
+    {
+        path: 'homeLogin',
+        title: 'Página principal',
+        loadComponent: () => import('./components/home-login/home-login.component').then(m => m.HomeLoginComponent)
+    },
 ];
