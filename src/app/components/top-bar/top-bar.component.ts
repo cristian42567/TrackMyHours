@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router} from '@angular/router';
 
 @Component({
   selector: 'topBar',
@@ -8,5 +9,13 @@ import { Component } from '@angular/core';
   styleUrl: './top-bar.component.css'
 })
 export class TopBarComponent {
+
+  constructor(private router: Router){}
+
+  textoDeBoton:string = "Cerrar sesión";
+
+  cerrarSesion(){
+    this.router.navigate(['']);
+  }
 
 }

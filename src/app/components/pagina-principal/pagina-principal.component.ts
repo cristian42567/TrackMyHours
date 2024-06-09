@@ -37,6 +37,8 @@ export class PaginaPrincipalComponent {
             this.usuarioLogueado.emit();
             
             this.router.navigate(['/homeLogin'])
+        }else{
+            alert("Usuario o contraseña incorrecta")
         }    
 
         this.usuario.usuario=""

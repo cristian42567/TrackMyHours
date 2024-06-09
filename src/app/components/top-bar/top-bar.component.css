@@ -1,0 +1,12 @@
+.contenedor{
+    background-color: aquamarine;
+    height: 50px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+input{
+    cursor: pointer;
+}
