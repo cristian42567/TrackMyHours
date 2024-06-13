@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { RegistroComponent } from "../registro/registro.component";
 import { DatosLogin } from '../../interfaces/datos-login';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
         RegistroComponent,
     ]
 })
-export class PaginaPrincipalComponent {
+export class PaginaPrincipalComponent implements OnInit{
 
     formularioAbierto:boolean = false;
 
@@ -23,17 +23,37 @@ export class PaginaPrincipalComponent {
         this.formularioAbierto = !this.formularioAbierto
     }
 
+    //TODO: Mirar login
     @Output() usuarioLogueado: EventEmitter<void> = new EventEmitter<void>();
 
-    constructor(private router: Router){}
-
-    usuario:DatosLogin={
-        usuario:"",
-        contrasena:""
+    constructor(
+        private router: Router,
+        private formBuilder: FormBuilder
+    ){}
+    ngOnInit(): void {
+        this.formularioLogin = this.formBuilder.group({
+            usuario: ['', [
+                Validators.required,
+                Validators.minLength(4),
+                Validators.maxLength(20)
+            ]],
+            contrasena: ['', [
+                Validators.required,
+                Validators.minLength(5),
+                Validators.maxLength(20),
+                Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/),
+            ]]
+        })
     }
 
+    formularioLogin:FormGroup = new FormGroup({
+        usuario: new FormControl(''),
+        contrasena: new FormControl(''),
+    })
+
     login(){
-        if(this.usuario.usuario=="admin" && this.usuario.contrasena=="admin"){
+        if(this.formularioLogin.get('usuario')?.value=="admin" 
+        && this.formularioLogin.get('contrasena')?.value=="admin"){
             this.usuarioLogueado.emit();
             
             this.router.navigate(['/homeLogin'])
@@ -41,7 +61,7 @@ export class PaginaPrincipalComponent {
             alert("Usuario o contraseña incorrecta")
         }    
 
-        this.usuario.usuario=""
-        this.usuario.contrasena=""
+        this.formularioLogin.get('usuario')?.setValue("")       
+        this.formularioLogin.get('contrasena')?.setValue("")
     }
 }

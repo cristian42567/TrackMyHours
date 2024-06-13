@@ -11,4 +11,8 @@ export const routes: Routes = [
         title: 'Página principal',
         loadComponent: () => import('./components/home-login/home-login.component').then(m => m.HomeLoginComponent)
     },
+    {
+        path: '**',
+        loadComponent: ()=> import('./components/404/404.component').then(m => m.NotFoundComponent)
+    }
 ];
