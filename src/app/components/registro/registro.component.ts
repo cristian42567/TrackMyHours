@@ -18,6 +18,7 @@ export class RegistroComponent implements OnInit {
 
   //TODO: Mirar registro
   @Output() usuarioRegistrado: EventEmitter<void> = new EventEmitter<void>();
+  @Output() cerrarFormulario: EventEmitter<void> = new EventEmitter<void>();
 
   constructor(
     private router: Router,
@@ -26,43 +27,39 @@ export class RegistroComponent implements OnInit {
   
   ngOnInit(): void {
     this.formularioRegistro = this.formBuilder.group({
-      nombre: ['', [
+      nombre: ["", [
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(20)
     ]],
-      usuario: ['', [
+      usuario: ["", [
           Validators.required,
           Validators.minLength(4),
           Validators.maxLength(20)
       ]],
-      contrasena: ['', [
+      contrasena: ["", [
           Validators.required,
           Validators.minLength(5),
           Validators.maxLength(20),
-          Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/),
       ]],
-      confirmarContrasena: ['', [
+      confirmarContrasena: ["", [
         Validators.required,
         Validators.minLength(5),
         Validators.maxLength(20),
-        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/),
     ]],
   })
   }
 
   formularioRegistro:FormGroup = new FormGroup({
-    nombre: new FormControl(''),
-    usuario: new FormControl(''),
-    contrasena: new FormControl(''),
-    confirmarContrasena: new FormControl('')
+    nombre: new FormControl(""),
+    usuario: new FormControl(""),
+    contrasena: new FormControl(""),
+    confirmarContrasena: new FormControl("")
 })
 
   registro() {
-    const nombreUsuario = this.formularioRegistro.get('nombre')?.value
-    const Usuario = this.formularioRegistro.get('usuario')?.value
-    const contraseña = this.formularioRegistro.get('contrasena')?.value
-    const confirmarContraseña = this.formularioRegistro.get('confirmarContrasena')?.value
+    const contraseña = this.formularioRegistro.get("contrasena")?.value
+    const confirmarContraseña = this.formularioRegistro.get("confirmarContrasena")?.value
 
     if (contraseña != confirmarContraseña) {
       alert("Las contraseñas no coinciden")
@@ -71,15 +68,15 @@ export class RegistroComponent implements OnInit {
       alert("Te has registrado correctamente")
     }
 
-    this.formularioRegistro.get('nombre')?.setValue("") 
-    this.formularioRegistro.get('usuario')?.setValue("")
-    this.formularioRegistro.get('contrasena')?.setValue("")
-    this.formularioRegistro.get('confirmarContrasena')?.setValue("")
+    this.formularioRegistro.get("nombre")?.setValue("") 
+    this.formularioRegistro.get("usuario")?.setValue("")
+    this.formularioRegistro.get("contrasena")?.setValue("")
+    this.formularioRegistro.get("confirmarContrasena")?.setValue("")
 
   }
 
-  cerrarFormulario(){
-    
+  cerrarForm(){
+     this.cerrarFormulario.emit();
   }
 
 

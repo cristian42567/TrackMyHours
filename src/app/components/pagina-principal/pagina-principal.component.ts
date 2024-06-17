@@ -23,6 +23,7 @@ export class PaginaPrincipalComponent implements OnInit{
         this.formularioAbierto = !this.formularioAbierto
     }
 
+
     //TODO: Mirar login
     @Output() usuarioLogueado: EventEmitter<void> = new EventEmitter<void>();
 
@@ -32,36 +33,35 @@ export class PaginaPrincipalComponent implements OnInit{
     ){}
     ngOnInit(): void {
         this.formularioLogin = this.formBuilder.group({
-            usuario: ['', [
+            usuario: ["", [
                 Validators.required,
-                Validators.minLength(4),
+                Validators.minLength(5),
                 Validators.maxLength(20)
             ]],
-            contrasena: ['', [
+            contrasena: ["", [
                 Validators.required,
                 Validators.minLength(5),
                 Validators.maxLength(20),
-                Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/),
-            ]]
+            ]],
         })
     }
 
     formularioLogin:FormGroup = new FormGroup({
-        usuario: new FormControl(''),
-        contrasena: new FormControl(''),
+        usuario: new FormControl(""),
+        contrasena: new FormControl("")
     })
 
     login(){
-        if(this.formularioLogin.get('usuario')?.value=="admin" 
-        && this.formularioLogin.get('contrasena')?.value=="admin"){
-            this.usuarioLogueado.emit();
-            
-            this.router.navigate(['/homeLogin'])
-        }else{
-            alert("Usuario o contraseña incorrecta")
-        }    
+        const usuario = this.formularioLogin.get("usuario")?.value
+        const contraseña = this.formularioLogin.get("contrasena")?.value
 
-        this.formularioLogin.get('usuario')?.setValue("")       
-        this.formularioLogin.get('contrasena')?.setValue("")
+        if(usuario == "admin" && contraseña == "admin"){
+            this.usuarioLogueado.emit();
+                                    
+            this.router.navigate(['/homeLogin'])
+        }
+
+        this.formularioLogin.get("usuario")?.setValue("")       
+        this.formularioLogin.get("contrasena")?.setValue("")
     }
 }

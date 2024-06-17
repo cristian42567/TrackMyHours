@@ -6,12 +6,12 @@
         </div>
         <div class="inicio-sesion">
             <form (submit)="login()" [formGroup]="formularioLogin">
-                <input type="text" placeholder="Usuario" formGroupName="usuario" spellcheck="false">
-                <input type="password" placeholder="Contraseña" formGroupName="contrasena">
-                <button>Iniciar Sesión</button>
+                <input type="text" placeholder="Usuario" formControlName="usuario" spellcheck="false">
+                <input type="password" placeholder="Contraseña" formControlName="contrasena">
+                <button class="botonLogin" [disabled]="formularioLogin.invalid">Iniciar Sesión</button>
             </form>
             <hr class="divisor">
-            <button class="registro" (click)="cambiarFormulario()">Crear una nueva cuenta</button>
+            <button class="registro" (click)="cambiarFormulario()" (cerrarFormulario)="cambiarFormulario()">Crear una nueva cuenta</button>
         </div>
     </div>
 </div> 
