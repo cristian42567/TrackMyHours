@@ -82,4 +82,5 @@ form button{
 
 .botonRegistro:disabled {
     opacity: 70%;
+    background-color: #455345;
 }

@@ -76,7 +76,7 @@ export class RegistroComponent implements OnInit {
   }
 
   cerrarForm(){
-     this.cerrarFormulario.emit();
+    this.cerrarFormulario.emit();
   }
 
 

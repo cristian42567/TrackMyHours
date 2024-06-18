@@ -20,8 +20,13 @@ export class PaginaPrincipalComponent implements OnInit{
     formularioAbierto:boolean = false;
 
     cambiarFormulario(){
-        this.formularioAbierto = !this.formularioAbierto
+        this.formularioAbierto = true
     }
+
+    cerrarFormularioRegistro(){
+        this.formularioAbierto = false;
+    }
+  
 
 
     //TODO: Mirar login

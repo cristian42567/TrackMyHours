@@ -11,11 +11,11 @@
                 <button class="botonLogin" [disabled]="formularioLogin.invalid">Iniciar Sesión</button>
             </form>
             <hr class="divisor">
-            <button class="registro" (click)="cambiarFormulario()" (cerrarFormulario)="cambiarFormulario()">Crear una nueva cuenta</button>
+            <button class="registro" (click)="cambiarFormulario()">Crear una nueva cuenta</button>
         </div>
     </div>
 </div> 
 
 @if (formularioAbierto) {
-    <registro/>
+    <registro (cerrarFormulario)="cerrarFormularioRegistro()"/>
 }
