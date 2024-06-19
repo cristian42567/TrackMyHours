@@ -1,8 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { RegistroComponent } from "../registro/registro.component";
-import { DatosLogin } from '../../interfaces/datos-login';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UserService } from '../../services/user.service';
 
 @Component({
     selector: 'paginaPricnipal',
@@ -15,27 +15,26 @@ import { Router } from '@angular/router';
         RegistroComponent,
     ]
 })
-export class PaginaPrincipalComponent implements OnInit{
+export class PaginaPrincipalComponent implements OnInit {
 
-    formularioAbierto:boolean = false;
+    formularioAbierto: boolean = false;
 
-    cambiarFormulario(){
+    cambiarFormulario() {
         this.formularioAbierto = true
     }
 
-    cerrarFormularioRegistro(){
+    cerrarFormularioRegistro() {
         this.formularioAbierto = false;
     }
-  
-
 
     //TODO: Mirar login
     @Output() usuarioLogueado: EventEmitter<void> = new EventEmitter<void>();
 
     constructor(
         private router: Router,
-        private formBuilder: FormBuilder
-    ){}
+        private formBuilder: FormBuilder,
+        private servicio: UserService
+    ) { }
     ngOnInit(): void {
         this.formularioLogin = this.formBuilder.group({
             usuario: ["", [
@@ -51,22 +50,22 @@ export class PaginaPrincipalComponent implements OnInit{
         })
     }
 
-    formularioLogin:FormGroup = new FormGroup({
+    formularioLogin: FormGroup = new FormGroup({
         usuario: new FormControl(""),
         contrasena: new FormControl("")
     })
 
-    login(){
-        const usuario = this.formularioLogin.get("usuario")?.value
-        const contraseña = this.formularioLogin.get("contrasena")?.value
+    login() {
+        let loginCorrecto = this.servicio.login(this.formularioLogin.get("usuario")?.value,
+            this.formularioLogin.get("contrasena")?.value)
 
-        if(usuario == "admin" && contraseña == "admin"){
+        if (loginCorrecto) {
             this.usuarioLogueado.emit();
-                                    
-            this.router.navigate(['/homeLogin'])
+
+            this.router.navigate(['/homeLogin']);
         }
 
-        this.formularioLogin.get("usuario")?.setValue("")       
+        this.formularioLogin.get("usuario")?.setValue("")
         this.formularioLogin.get("contrasena")?.setValue("")
     }
 }
