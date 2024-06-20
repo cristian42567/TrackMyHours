@@ -7,8 +7,10 @@
         <div>
             <hr class="divisor">
         </div>
-        <input type="text" placeholder="Tu nombre" formControlName="nombre">
-        <input type="text" placeholder="Nombre de usuario" formControlName="usuario">
+        <p class="campos">Completa los siguientes campos: </p>
+        <input type="text" placeholder="Correo electrónico" formControlName="correoElectronico">
+        <input type="text" placeholder="Nombre" formControlName="nombre">
+        <input type="text" placeholder="Usuario" formControlName="usuario">
         <input type="password" placeholder="Contraseña" formControlName="contrasena">
         <input type="password" placeholder="Confirmar contraseña" formControlName="confirmarContrasena">
         <button class="botonRegistro" [disabled]="formularioRegistro.invalid">Registrarse</button>

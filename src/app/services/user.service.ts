@@ -4,13 +4,13 @@ import { User } from '../interfaces/user';
 @Injectable({
   providedIn: 'root'
 })
-export class UserService implements OnInit{
+export class UserService implements OnInit {
 
-  constructor() {}
+  constructor() { }
   ngOnInit(): void {
     let usuarios = localStorage.getItem("usuarios")
 
-    if(usuarios != null){
+    if (usuarios != null) {
       const arrayUsers: Array<User> = JSON.parse(usuarios).usuariosJson
 
       this.usuarios = arrayUsers
@@ -25,26 +25,13 @@ export class UserService implements OnInit{
   }
 
   //SIMULACIÓN DE LA BASE DE DATOS
-  usuarios: Array<User> = [ 
-    {
-      nombre: "Cristian",
-      usuario: "admin",
-      correoElectronico: "cristian42567@gmail.com",
-      contrasena: "admin",
-    },
-    {
-      nombre: "Carol",
-      usuario: "admin2",
-      correoElectronico: "carol@gmailcom",
-      contrasena: "admin2",
-    },
-  ]
+  usuarios: Array<User> = []
 
   login(nombreDeUsuario: string, contraseña: string): Boolean {
 
     for (let i = 0; i < this.usuarios.length; i++) {
       if (nombreDeUsuario == this.usuarios[i].correoElectronico
-        || nombreDeUsuario == this.usuarios[i].usuario){
+        || nombreDeUsuario == this.usuarios[i].usuario) {
 
         if (contraseña == this.usuarios[i].contrasena) {
           this.userData = this.usuarios[i]
@@ -63,29 +50,29 @@ export class UserService implements OnInit{
     return false
   }
 
-  registro(nombreDeUsuario: string, contraseña: string, confirmarContraseña: string, correoElectronico: string) {
+  registro(nombre:string, nombreDeUsuario: string, contraseña: string, confirmarContraseña: string, correoElectronico: string) {
 
-    if(contraseña != confirmarContraseña){
+    if (contraseña != confirmarContraseña) {
       return false;
     }
 
     let coinciden = false
 
     this.usuarios.forEach(usuario => {
-      if(usuario.usuario == nombreDeUsuario || usuario.correoElectronico == correoElectronico){
+      if (usuario.usuario == nombreDeUsuario || usuario.correoElectronico == correoElectronico) {
         coinciden = true
       }
     });
 
-    if(coinciden ){
+    if (coinciden) {
       return false
     }
 
 
     const nuevoUsuario: User = {
       usuario: nombreDeUsuario,
-      nombre: "",
-      correoElectronico: "",
+      nombre: nombre,
+      correoElectronico: correoElectronico,
       contrasena: contraseña,
     }
 

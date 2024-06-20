@@ -12,9 +12,9 @@ import { UserService } from '../../services/user.service';
 export class HomeLoginComponent {
 
     constructor(
-        private service: UserService  
-    ){}
+        private service: UserService
+    ) { }
 
-    textoDeBoton:string = "Hola " + this.service.userData.nombre
+    textoDeBoton: string = "Hola " + this.service.usuarios
 
 }

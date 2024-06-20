@@ -1,4 +1,4 @@
-.contenedor{
+.contenedor {
     position: absolute;
     background-color: rgba(172, 172, 172, 0.856);
     width: 100%;
@@ -9,35 +9,42 @@
     align-items: center;
 }
 
-form{
+form {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 360px;
-    height: 400px; 
+    height: 480px;
     background-color: #ffffff;
     border-radius: 10px;
     font-size: 1.3rem;
 }
 
-form input{
+.campos {
+    font-size: 1.05rem;
+    margin-bottom: 20px;
+}
+
+form input {
     height: 40px;
     border: none;
     background-color: #f1f1f1;
     border-radius: 8px;
-    padding: 0 10px; 
+    padding: 0 10px;
     margin-bottom: 10px;
     width: 250px;
+    box-sizing: border-box; 
 }
 
 form input:focus {
     border: 2px solid #2ddb2d;
     outline: none;
-    background-color: #fffffff1; 
+    background-color: #fffffff1;
+    box-sizing: border-box; 
 }
 
-.cabecera{
+.cabecera {
     width: 90%;
     display: flex;
     justify-content: space-between;
@@ -47,16 +54,16 @@ form input:focus {
     margin-top: -20px;
 }
 
-.cerrar{
+.cerrar {
     font-size: 1.2rem;
     cursor: pointer;
 }
 
-.cerrar:hover{
+.cerrar:hover {
     color: red;
 }
 
-.titulo{
+.titulo {
     font-size: 1.3rem;
     color: #2ddb2d;
 }
@@ -65,10 +72,10 @@ form input:focus {
     width: 360px;
     border: none;
     border-top: 1px solid #1f3d21;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
 
-form button{    
+form button {
     height: 40px;
     width: 200px;
     border: none;
