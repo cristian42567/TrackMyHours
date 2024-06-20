@@ -31,7 +31,7 @@ export class RegistroComponent implements OnInit {
       nombre: ["", [
         Validators.required,
         Validators.minLength(3),
-        Validators.maxLength(20)
+        Validators.maxLength(20),
       ]],
       correoElectronico: ["", [
         Validators.required,

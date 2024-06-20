@@ -8,7 +8,7 @@
             <form (submit)="login()" [formGroup]="formularioLogin">
                 <input type="text" placeholder="Usuario" formControlName="usuario" spellcheck="false">
                 <input type="password" placeholder="Contraseña" formControlName="contrasena">
-                <button class="botonLogin" [disabled]="formularioLogin.invalid">Iniciar Sesión</button>
+                <button class="botonLogin">Iniciar Sesión</button>
             </form>
             <hr class="divisor">
             <button class="registro" (click)="cambiarFormulario()">Crear una nueva cuenta</button>

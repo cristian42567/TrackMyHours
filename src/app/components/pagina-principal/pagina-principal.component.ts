@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { RegistroComponent } from "../registro/registro.component";
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, MinLengthValidator, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 
@@ -55,7 +55,11 @@ export class PaginaPrincipalComponent implements OnInit {
         contrasena: new FormControl("")
     })
 
+    //TODO: Quitar alerts
     login() {
+        const usuario = this.formularioLogin.get("usuario")?.value
+        const contraseña = this.formularioLogin.get("contrasena")?.value
+
         let loginCorrecto = this.servicio.login(this.formularioLogin.get("usuario")?.value,
             this.formularioLogin.get("contrasena")?.value)
 
@@ -63,9 +67,15 @@ export class PaginaPrincipalComponent implements OnInit {
             this.usuarioLogueado.emit();
 
             this.router.navigate(['/homeLogin']);
+        } else if (usuario == "" || contraseña == "") {
+            alert("Debes rellenar todos los campos")
+        } else if (!loginCorrecto) {
+            alert("Usuario o contraseña incorrectos")
         }
 
         this.formularioLogin.get("usuario")?.setValue("")
         this.formularioLogin.get("contrasena")?.setValue("")
+
     }
+
 }

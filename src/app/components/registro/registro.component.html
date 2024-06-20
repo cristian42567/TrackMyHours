@@ -13,6 +13,6 @@
         <input type="text" placeholder="Usuario" formControlName="usuario">
         <input type="password" placeholder="Contraseña" formControlName="contrasena">
         <input type="password" placeholder="Confirmar contraseña" formControlName="confirmarContrasena">
-        <button class="botonRegistro" [disabled]="formularioRegistro.invalid">Registrarse</button>
+        <button class="botonRegistro" [disabled]="formularioRegistro.invalid" (click)="registro()">Registrarse</button>
     </form> 
 </div> 
