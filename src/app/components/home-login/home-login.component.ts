@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { TopBarComponent } from "../top-bar/top-bar.component";
+import { UserService } from '../../services/user.service';
 
 @Component({
     selector: 'app-home-login',
@@ -9,5 +10,11 @@ import { TopBarComponent } from "../top-bar/top-bar.component";
     imports: [TopBarComponent]
 })
 export class HomeLoginComponent {
+
+    constructor(
+        private service: UserService  
+    ){}
+
+    textoDeBoton:string = "Hola " + this.service.userData.nombre
 
 }

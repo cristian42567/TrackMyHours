@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'registro',
@@ -21,7 +22,8 @@ export class RegistroComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private servicio: UserService
   ){}
   
   ngOnInit(): void {
@@ -57,10 +59,13 @@ export class RegistroComponent implements OnInit {
 })
 
   registro() {
+    const nombreDeUsuario = this.formularioRegistro.get("usuario")?.value
     const contraseña = this.formularioRegistro.get("contrasena")?.value
     const confirmarContraseña = this.formularioRegistro.get("confirmarContrasena")?.value
+    const correoElectronico = this.formularioRegistro.get("correoElectronico")?.value
+    const registroConExito = this.servicio.registro(nombreDeUsuario,contraseña,confirmarContraseña,correoElectronico)
 
-    if (contraseña != confirmarContraseña) {
+    if (!registroConExito) {
       alert("Las contraseñas no coinciden")
     }else{
       this.router.navigate(['/homeLogin'])
