@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { HorasExtrasService } from '../../services/horas-extras.service';
+import { HorasExtras } from '../../interfaces/horasExtras';
 
 @Component({
   selector: 'app-ver-horas',
@@ -7,6 +9,14 @@ import { Component } from '@angular/core';
   templateUrl: './ver-horas.component.html',
   styleUrl: './ver-horas.component.css'
 })
-export class VerHorasComponent {
+export class VerHorasComponent implements OnInit{
+
+  horasExtras: HorasExtras[] = [];
+
+  constructor(private horasExtrasService: HorasExtrasService) { }
+  
+  ngOnInit(): void {
+    this.horasExtras = this.horasExtrasService.obtenerHorasExtras();
+  }
 
 }

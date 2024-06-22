@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TopBarComponent } from '../../components/top-bar/top-bar.component';
-import { UserService } from '../../services/user.service';
+import { HorasExtras } from '../../interfaces/horasExtras';
+import { HorasExtrasService } from '../../services/horas-extras.service';
+import { FormControl, FormGroup, Validators, FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @Component({
@@ -8,14 +10,55 @@ import { UserService } from '../../services/user.service';
     standalone: true,
     templateUrl: './home-login.component.html',
     styleUrl: './home-login.component.css',
-    imports: [TopBarComponent]
+    imports: [TopBarComponent,
+        ReactiveFormsModule,
+        FormsModule
+    ]
 })
-export class HomeLoginComponent {
+
+export class HomeLoginComponent implements OnInit {
 
     constructor(
-        private service: UserService
+        private horasExtrasService: HorasExtrasService,
+        private formBuilder: FormBuilder,
     ) { }
+    ngOnInit(): void {
+        this.horasExtras = this.formBuilder.group({
+            date: ["", [
+                Validators.required,
+            ]],
+            horas: ["", [
+                Validators.required,
+            ]],
+            descrpcion: ["", [
+                Validators.required,
+            ]],
+        })
+    }
 
-    textoDeBoton: string = "Hola " + this.service.usuarios
+    horasExtras: FormGroup = new FormGroup({
+        id: new FormControl(),
+        date: new FormControl(),
+        horas: new FormControl(),
+        descrpcion: new FormControl(),
+    });
+
+    horaExtra: HorasExtras = {
+        id: 0,
+        date: new Date(),
+        horas: 0,
+        descrpcion: ''
+    }
+
+    agregarHorasExtras(): void {
+
+        this.horasExtrasService.añadirHorasExtras(this.horasExtras.value);
+        
+
+        this.horasExtras.get("id")?.setValue("")
+        this.horasExtras.get("date")?.setValue("")
+        this.horasExtras.get("horas")?.setValue("")
+        this.horasExtras.get("descrpcion")?.setValue("")
+    }
 
 }

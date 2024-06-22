@@ -16,6 +16,7 @@ import { UserService } from '../../services/user.service';
         RegistroComponent,
     ]
 })
+
 export class PaginaPrincipalComponent implements OnInit {
 
     formularioAbierto: boolean = false;
