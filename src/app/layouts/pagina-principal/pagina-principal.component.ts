@@ -1,8 +1,9 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { RegistroComponent } from "../registro/registro.component";
+import { RegistroComponent } from '../../components/registro/registro.component';
 import { FormBuilder, FormControl, FormGroup, FormsModule, MinLengthValidator, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
+
 
 @Component({
     selector: 'paginaPricnipal',
