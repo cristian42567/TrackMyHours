@@ -68,7 +68,7 @@ export class PaginaPrincipalComponent implements OnInit {
         if (loginCorrecto) {
             this.usuarioLogueado.emit();
 
-            this.router.navigate(['/homeLogin']);
+            this.router.navigate(['/home-login']);
         } else if (usuario == "" || contraseña == "") {
             alert("Debes rellenar todos los campos")
         } else if (!loginCorrecto) {

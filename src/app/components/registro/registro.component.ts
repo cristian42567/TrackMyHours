@@ -74,7 +74,7 @@ export class RegistroComponent implements OnInit {
     if (!registroConExito) {
       alert("Las contraseñas no coinciden")
     } else {
-      this.router.navigate(['/homeLogin'])
+      this.router.navigate(['/home-login'])
       alert("Te has registrado correctamente")
     }
 
