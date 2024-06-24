@@ -25,7 +25,6 @@ export class VerHorasComponent implements OnInit {
       id: [''],
       date: ['', Validators.required],
       horas: ['', Validators.required, Validators.min(1)],
-      descrpcion: ['', Validators.required],
     })
   }
 
