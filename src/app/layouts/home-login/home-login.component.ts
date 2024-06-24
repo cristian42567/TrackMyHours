@@ -24,6 +24,7 @@ export class HomeLoginComponent implements OnInit {
         private formBuilder: FormBuilder,
         private router: Router,
     ) { }
+    
     ngOnInit(): void {
         this.horasExtras = this.formBuilder.group({
             date: ["", [
@@ -49,7 +50,7 @@ export class HomeLoginComponent implements OnInit {
         id: 0,
         date: new Date(),
         horas: 0,
-        descrpcion: ''
+        descripcion: ''
     }
 
     agregarHorasExtras(): void {

@@ -7,7 +7,7 @@ import { HorasExtras } from '../interfaces/horasExtras';
 export class HorasExtrasService {
 
   private horasExtra: HorasExtras[] = [];
-  private siguienteId: number = 0;
+  private siguienteId: number = 1;
 
   constructor() { }
 
