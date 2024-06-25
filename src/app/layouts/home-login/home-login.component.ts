@@ -33,7 +33,7 @@ export class HomeLoginComponent implements OnInit {
             horas: ["", [
                 Validators.required,
             ]],
-            descrpcion: ["", [
+            descripcion: ["", [
                 Validators.required,
             ]],
         })
@@ -43,7 +43,7 @@ export class HomeLoginComponent implements OnInit {
         id: new FormControl(),
         date: new FormControl(),
         horas: new FormControl(),
-        descrpcion: new FormControl(),
+        descripcion: new FormControl(),
     });
 
     horaExtra: HorasExtras = {
@@ -61,7 +61,7 @@ export class HomeLoginComponent implements OnInit {
         this.horasExtras.get("id")?.setValue("")
         this.horasExtras.get("date")?.setValue("")
         this.horasExtras.get("horas")?.setValue("")
-        this.horasExtras.get("descrpcion")?.setValue("")
+        this.horasExtras.get("descripcion")?.setValue("")
     }
 
     cargarVista(){

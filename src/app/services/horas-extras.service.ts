@@ -7,7 +7,7 @@ import { HorasExtras } from '../interfaces/horasExtras';
 export class HorasExtrasService {
 
   private horasExtra: HorasExtras[] = [];
-  private siguienteId: number = 1;
+  private siguienteId = 1;
 
   constructor() { }
 
@@ -25,10 +25,10 @@ export class HorasExtrasService {
     return this.horasExtra.find(eh => eh.id === id);
   }
 
-  actualizarHorasExtras(actualizarHorasExtras: HorasExtras): void {
-    const index = this.horasExtra.findIndex(eh => eh.id === actualizarHorasExtras.id);
+  actualizarHorasExtras(horasExtras: HorasExtras): void {
+    const index = this.horasExtra.findIndex(eh => eh.id === horasExtras.id);
     if (index !== -1) {
-      this.horasExtra[index] = actualizarHorasExtras;
+      this.horasExtra[index] = horasExtras;
     }
   }
 

@@ -12,32 +12,45 @@ import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, 
   templateUrl: './ver-horas.component.html',
   styleUrl: './ver-horas.component.css'
 })
+
 export class VerHorasComponent implements OnInit {
 
-  horasExtra: HorasExtras[] = [];
-  editarForm: FormGroup;
-  editandoId: number | null = null;
   constructor(
     private horasExtrasService: HorasExtrasService,
     private formBuilder: FormBuilder
-  ) { 
+  ) { }
+  ngOnInit(): void {
+    this.horasExtra = this.horasExtrasService.obtenerHorasExtras();
+
     this.editarForm = this.formBuilder.group({
-      id: [''],
-      date: ['', Validators.required],
-      horas: ['', Validators.required, Validators.min(1)],
+      date: ["", [
+        Validators.required,
+      ]],
+      horas: ["", [
+        Validators.required,
+        Validators.min(1),
+      ]],
+      descripcion: ["", [
+        Validators.required
+      ]],
     })
   }
 
-  ngOnInit(): void {
-    this.horasExtra = this.horasExtrasService.obtenerHorasExtras();
-  }
+  editarForm: FormGroup = new FormGroup({
+    date: new FormControl(),
+    horas: new FormControl(),
+    descripcion: new FormControl(),
+  })
+
+  horasExtra: HorasExtras[] = [];
+  editandoId: number | null = null;
 
   editarHoras(horasExtras: HorasExtras): void {
     this.editandoId = horasExtras.id;
     this.editarForm.setValue({
       date: horasExtras.date,
       horas: horasExtras.horas,
-      descrpcion: horasExtras.descripcion
+      descripcion: horasExtras.descripcion
     });
   }
 

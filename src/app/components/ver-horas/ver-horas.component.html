@@ -1,6 +1,6 @@
 <div>
     @for (horasExtras of horasExtra; track $index) {
-    @if (horasExtras.horas && horasExtras.date) {
+    @if (editandoId !== horasExtras.id) {
     <p>El día {{ horasExtras.date }}, hice {{ horasExtras.horas }} horas, {{ horasExtras.descripcion }}</p>
     <button (click)="editarHoras(horasExtras)">Editar</button>
     <button (click)="eliminarHoras(horasExtras.id)">Eliminar</button>
