@@ -19,12 +19,15 @@ import { Router } from '@angular/router';
 
 export class HomeLoginComponent implements OnInit {
 
+    horasExtra: HorasExtras[] = [];
+    hayHorasExtras: boolean = false;
+
     constructor(
         private horasExtrasService: HorasExtrasService,
         private formBuilder: FormBuilder,
         private router: Router,
     ) { }
-    
+
     ngOnInit(): void {
         this.horasExtras = this.formBuilder.group({
             date: ["", [
@@ -37,6 +40,8 @@ export class HomeLoginComponent implements OnInit {
                 Validators.required,
             ]],
         })
+        this.horasExtra = this.horasExtrasService.obtenerHorasExtras();
+        this.hayHorasExtras = this.horasExtra.length > 0;
     }
 
     horasExtras: FormGroup = new FormGroup({
@@ -46,26 +51,26 @@ export class HomeLoginComponent implements OnInit {
         descripcion: new FormControl(),
     });
 
-    horaExtra: HorasExtras = {
-        id: 0,
-        date: new Date(),
-        horas: 0,
-        descripcion: ''
-    }
-
     agregarHorasExtras(): void {
-
-        this.horasExtrasService.añadirHorasExtras(this.horasExtras.value);
-        
-
-        this.horasExtras.get("id")?.setValue("")
-        this.horasExtras.get("date")?.setValue("")
-        this.horasExtras.get("horas")?.setValue("")
-        this.horasExtras.get("descripcion")?.setValue("")
+        if (this.horasExtras.valid) {
+            this.horasExtrasService.añadirHorasExtras(this.horasExtras.value);
+            this.horasExtra = this.horasExtrasService.obtenerHorasExtras();
+            this.hayHorasExtras = this.horasExtra.length > 0;
+            this.horasExtras.reset();
+        } 
+        this.horasExtras.get("date")?.setValue("");
+        this.horasExtras.get("horas")?.setValue("");
+        this.horasExtras.get("descripcion")?.setValue("");
     }
 
-    cargarVista(){
+    cargarVista() {
         this.router.navigate(['/mostrar-horas'])
+    }
+
+    aviso(){
+        if(this.horasExtras.invalid){
+            alert("Debes rellenar todos los campos")
+        }
     }
 
 }

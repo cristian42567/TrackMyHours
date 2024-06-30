@@ -79,6 +79,7 @@ export class VerHorasComponent implements OnInit {
   buscarPorId(e: number, i: HorasExtras): number {
     return i.id
   }
+
 }
 
 
