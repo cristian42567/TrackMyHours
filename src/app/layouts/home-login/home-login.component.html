@@ -1,17 +1,17 @@
-<topBar />
-<form (submit)="agregarHorasExtras()" [formGroup]="horasExtras">
-    <label for="date">Fecha:</label>
-    <input type="date" id="date" formControlName="date">
+<div class="contenedor">
+    <div class="formulario">
+        <div>
+            <p class="titulo">Registrar horas</p>
+        </div>
 
-    <label for="hours">Horas:</label>
-    <input type="number" id="hours" formControlName="horas">
-
-    <label for="descripcion">Descripción:</label>
-    <input type="text" id="descripcion" formControlName="descripcion">
-
-    <button type="submit" (click)="aviso()">Agregar</button>
-
-    <button (click)="cargarVista()">Cargar vista</button>
-
-
-</form>
+        <form (submit)="agregarHorasExtras()" [formGroup]="horasExtras">
+            <input class="fecha" type="date" placeholder="Introducir fecha" id="date" formControlName="date">
+            <input type="number" placeholder="Introducir horas" id="hours" formControlName="horas">
+            <input type="text" placeholder="Introducir descripción" id="descripcion" formControlName="descripcion">
+        
+            <button type="submit" class="agregar" (click)="aviso()">Agregar</button>
+        
+            <button class="cargar" (click)="cargarVista()">Ver horas realizadas</button>
+        </form>
+    </div>
+</div> 

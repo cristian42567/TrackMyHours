@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HorasExtrasService } from '../../services/horas-extras.service';
 import { HorasExtras } from '../../interfaces/horasExtras';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-ver-horas',
@@ -10,14 +11,16 @@ import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, 
     FormsModule
   ],
   templateUrl: './ver-horas.component.html',
-  styleUrl: './ver-horas.component.css'
+  styleUrl: './ver-horas.component.css',
+  providers: [DatePipe]
 })
 
 export class VerHorasComponent implements OnInit {
 
   constructor(
     private horasExtrasService: HorasExtrasService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private datePipe: DatePipe
   ) { }
   ngOnInit(): void {
     this.horasExtra = this.horasExtrasService.obtenerHorasExtras();
@@ -48,7 +51,7 @@ export class VerHorasComponent implements OnInit {
   editarHoras(horasExtras: HorasExtras): void {
     this.editandoId = horasExtras.id;
     this.editarForm.setValue({
-      date: horasExtras.date,
+      date: this.datePipe.transform(horasExtras.date, 'dd-MM-yyyy'),
       horas: horasExtras.horas,
       descripcion: horasExtras.descripcion
     });
@@ -68,7 +71,9 @@ export class VerHorasComponent implements OnInit {
     if (this.editarForm.valid && this.editandoId !== null) {
       const editarHoras: HorasExtras = {
         id: this.editandoId,
-        ...this.editarForm.value
+        date: new Date(this.editarForm.value.date),
+        horas: this.editarForm.value.horas,
+        descripcion: this.editarForm.value.descripcion
       };
       this.horasExtrasService.actualizarHorasExtras(editarHoras);
       this.horasExtra = this.horasExtrasService.obtenerHorasExtras();
@@ -80,6 +85,9 @@ export class VerHorasComponent implements OnInit {
     return i.id
   }
 
+  formatearFecha(fecha: Date): string | null {
+    return this.datePipe.transform(fecha, 'dd-MM-yyyy');
+  }
 }
 
 
