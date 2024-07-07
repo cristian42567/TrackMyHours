@@ -50,7 +50,7 @@
             width: 100%;
             height: 40px;
             border: none;
-            background-color: #2ddb2db0;
+            background-color: #3b8545;
             border-radius: 8px;
             color: white;
             font-weight: bold;
@@ -59,15 +59,9 @@
         }
 
         .agregar:hover{
-            background-color: #3b8545;
+            background-color: #2ddb2d;
         }
-        
-        .divisor {
-            width: 300px;
-            border: none;
-            border-top: 1px solid #1f3d21;
-        }
-        
+
         .cargar:hover{
-            background-color: #1f3d21;
+            background-color: #2ddb2d;
         }
