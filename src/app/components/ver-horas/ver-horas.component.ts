@@ -3,6 +3,8 @@ import { HorasExtrasService } from '../../services/horas-extras.service';
 import { HorasExtras } from '../../interfaces/horasExtras';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DatePipe } from '@angular/common';
+import { Router } from '@angular/router';
+import { HorasPorMes } from '../../interfaces/horas-por-mes';
 
 @Component({
   selector: 'app-ver-horas',
@@ -20,7 +22,8 @@ export class VerHorasComponent implements OnInit {
   constructor(
     private horasExtrasService: HorasExtrasService,
     private formBuilder: FormBuilder,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private router: Router,
   ) { }
   ngOnInit(): void {
     this.horasExtra = this.horasExtrasService.obtenerHorasExtras();
@@ -46,7 +49,9 @@ export class VerHorasComponent implements OnInit {
   })
 
   horasExtra: HorasExtras[] = [];
+  horasPorMes: HorasPorMes[] = [];
   editandoId: number | null = null;
+  vistaActual: string = 'totales';
 
   editarHoras(horasExtras: HorasExtras): void {
     this.editandoId = horasExtras.id;
@@ -81,12 +86,48 @@ export class VerHorasComponent implements OnInit {
     }
   }
 
-  buscarPorId(e: number, i: HorasExtras): number {
+  buscarPorId(i: HorasExtras): number {
     return i.id
   }
 
   formatearFecha(fecha: Date): string | null {
     return this.datePipe.transform(fecha, 'dd-MM-yyyy');
+  }
+
+  volverAtras(){
+    this.router.navigate(['/home-login']);
+  }
+
+  mostrarHorasTotales(){
+    this.vistaActual = 'totales';
+  }
+
+  mostrarHorasPorMes(){
+    this.vistaActual = 'meses';
+    this.clasificarPorMes();
+  }
+
+  sumatotalHoras():number{
+      return this.horasExtra.reduce((sum, horasExtras) => sum + horasExtras.horas, 0);
+  }
+
+  clasificarPorMes():void{
+    const horasPorMesMap: { [key:string]:number} = {}
+
+    this.horasExtra.forEach(horaExtra => {
+      const mes = this.datePipe.transform(horaExtra.date, 'MMMM yyyy');
+      if (mes) {
+        if(!horasPorMesMap[mes]){
+          horasPorMesMap[mes] = 0;
+        }
+        horasPorMesMap[mes] += horaExtra.horas;
+      }
+    })
+
+    this.horasPorMes= Object.keys(horasPorMesMap).map(mes => ({
+      mes,
+      totalHoras: horasPorMesMap[mes]
+    }))
   }
 }
 

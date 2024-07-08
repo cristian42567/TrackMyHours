@@ -1,30 +1,38 @@
-<div>
-    @if(horasExtra.length <= 0) { 
-        <p>No hay horas registradas</p>
-        }@else {
-        @for (horasExtras of horasExtra; track $index) {
-        @if (editandoId !== horasExtras.id) {
-        <p>El día {{formatearFecha(horasExtras.date)}}, hice {{ horasExtras.horas }} horas, {{ horasExtras.descripcion }}</p>
-        <button (click)="editarHoras(horasExtras)">Editar</button>
-        <button (click)="eliminarHoras(horasExtras.id)">Eliminar</button>
-        }
-        <div>
-            @if (editandoId === horasExtras.id) {
-            <form (submit)="guardarHoras()" [formGroup]="editarForm">
-                <label for="date">Fecha:</label>
-                <input type="date" id="date" formControlName="date">
-
-                <label for="hours">Horas:</label>
-                <input type="number" id="hours" formControlName="horas">
-
-                <label for="descripcion">Descripción:</label>
-                <input type="text" id="descripcion" formControlName="descripcion">
-
-                <button type="submit" [disabled]="editarForm.invalid">Guardar</button>
-                <button type="button" (click)="cancelarEdicion()">Cancelar</button>
-            </form>
+ <div class="contenedor">
+    <div class="almacen">
+        @if(horasExtra.length <= 0) { 
+            <p>No hay horas registradas</p>
+            }@else {
+                <div class="topbar">
+                    
+                    <button (click)="mostrarHorasTotales()" [class.active]="vistaActual === 'totales'" >Ver horas totales</button>
+                    <button (click)="mostrarHorasPorMes()" [class.active]="vistaActual === 'meses'" >Ver horas por mes</button>
+                </div>
+                <div>
+                    <div>
+                        @if(vistaActual === 'totales') {
+                            @for (horasExtras of horasExtra; track $index) {
+                                <p>El día {{formatearFecha(horasExtras.date)}}, hice {{ horasExtras.horas }} horas, {{ horasExtras.descripcion }}</p>
+                                <button (click)="editarHoras(horasExtras)">Editar</button>
+                                <button (click)="eliminarHoras(horasExtras.id)">Eliminar</button>
+                            }
+                            <div>
+                                <p>Suma total de todas las horas totales es de {{sumatotalHoras()}} horas.</p>
+                            </div>
+                        }
+                    </div>
+                    
+                </div>
+                <div>
+                    @if(vistaActual === 'meses') {
+                        @for (mes of horasPorMes; track $index) {
+                            <p>En el mes de {{mes.mes}}, hice {{mes.totalHoras}} horas</p>
+                        }
+                    }
+                </div>
             }
-        </div>
-        }
-        }
+    </div>
+    <div class="botonAtras">
+        <button (click)="volverAtras()">Volver atrás</button>
+    </div>
 </div>
