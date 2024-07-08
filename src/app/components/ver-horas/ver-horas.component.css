@@ -1,4 +1,4 @@
-.contenedor{
+.contenedor {
     background-color: #f1f1f1;
     height: 100vh;
     width: 100%;
@@ -8,26 +8,62 @@
     justify-content: center;
 }
 
-.almacen{
+.almacen {
     background-color: white;
     height: 400px;
-    width: 30%;
+    width: 23%;
+    border-radius: 10px;
+    box-shadow: 0px 0px 0px 3px #2ddb2d;
 }
 
-.topbar{
+.topbar {
     display: flex;
     justify-content: space-around;
     align-items: center;
     height: 50px;
     width: 100%;
-    background-color: #3b8545;
+    background-color: white;
+    border-radius: 10px;
 }
 
-button.active{
-    background-color: #007bff;
+button.active {
+    background-color: #2ddb2d;
     color: white;
 }
 
-.botonAtras{
+.botonAtras {
     margin-top: 20px;
+}
+
+.botonTopBar {
+    border: none;
+    padding: 0 10px;
+    background-color: #f1f1f1;
+    border-radius: 15px;
+    height: 30px;
+    cursor: pointer;
+    font-size: 1rem;
+    color: #525151;
+    margin-top: 20px;
+}
+
+.formulario {
+    padding: 17px;
+}
+
+.botonesEdicion {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.botonesEdicion button {
+    border: none;
+    margin-right: 10px;
+    font-size: 0.9rem;
+    background-color: white;
+    cursor: pointer;
+}
+
+.botonesEdicion .eliminar {
+    color: red;
 }
