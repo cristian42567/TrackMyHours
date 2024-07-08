@@ -1,35 +1,37 @@
- <div class="contenedor">
+<div class="contenedor">
     <div class="almacen">
-        @if(horasExtra.length <= 0) { 
-            <p>No hay horas registradas</p>
+        @if(horasExtra.length <= 0) { <p>No hay horas registradas</p>
             }@else {
-                <div class="topbar">
-                    
-                    <button (click)="mostrarHorasTotales()" [class.active]="vistaActual === 'totales'" >Ver horas totales</button>
-                    <button (click)="mostrarHorasPorMes()" [class.active]="vistaActual === 'meses'" >Ver horas por mes</button>
-                </div>
+            <div class="topbar">
+
+                <button (click)="mostrarHorasTotales()" [class.active]="vistaActual === 'totales'">Ver horas
+                    totales</button>
+                <button (click)="mostrarHorasPorMes()" [class.active]="vistaActual === 'meses'">Ver horas por
+                    mes</button>
+            </div>
+            <div>
                 <div>
+                    @if(vistaActual === 'totales') {
+                    @for (horasExtras of horasExtra; track $index) {
+                    <p>El día {{formatearFecha(horasExtras.date)}}, hice {{ horasExtras.horas }} horas, {{
+                        horasExtras.descripcion }}</p>
+                    <button (click)="editarHoras(horasExtras)">Editar</button>
+                    <button (click)="eliminarHoras(horasExtras.id)">Eliminar</button>
+                    }
                     <div>
-                        @if(vistaActual === 'totales') {
-                            @for (horasExtras of horasExtra; track $index) {
-                                <p>El día {{formatearFecha(horasExtras.date)}}, hice {{ horasExtras.horas }} horas, {{ horasExtras.descripcion }}</p>
-                                <button (click)="editarHoras(horasExtras)">Editar</button>
-                                <button (click)="eliminarHoras(horasExtras.id)">Eliminar</button>
-                            }
-                            <div>
-                                <p>Suma total de todas las horas totales es de {{sumatotalHoras()}} horas.</p>
-                            </div>
-                        }
+                        <p>Suma total de todas las horas totales es de {{sumatotalHoras()}} horas.</p>
                     </div>
-                    
-                </div>
-                <div>
-                    @if(vistaActual === 'meses') {
-                        @for (mes of horasPorMes; track $index) {
-                            <p>En el mes de {{mes.mes}}, hice {{mes.totalHoras}} horas</p>
-                        }
                     }
                 </div>
+
+            </div>
+            <div>
+                @if(vistaActual === 'meses') {
+                @for (mes of horasPorMes; track $index) {
+                <p>En el mes de {{mes.mes}}, hice {{mes.totalHoras}} horas</p>
+                }
+                }
+            </div>
             }
     </div>
     <div class="botonAtras">

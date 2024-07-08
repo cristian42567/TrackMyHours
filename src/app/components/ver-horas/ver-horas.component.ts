@@ -2,9 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { HorasExtrasService } from '../../services/horas-extras.service';
 import { HorasExtras } from '../../interfaces/horasExtras';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { DatePipe } from '@angular/common';
+import { DatePipe, registerLocaleData } from '@angular/common';
 import { Router } from '@angular/router';
 import { HorasPorMes } from '../../interfaces/horas-por-mes';
+import localEs from '@angular/common/locales/es';
+
+
+registerLocaleData(localEs, 'es');
 
 @Component({
   selector: 'app-ver-horas',
@@ -115,7 +119,7 @@ export class VerHorasComponent implements OnInit {
     const horasPorMesMap: { [key:string]:number} = {}
 
     this.horasExtra.forEach(horaExtra => {
-      const mes = this.datePipe.transform(horaExtra.date, 'MMMM yyyy');
+      const mes = this.datePipe.transform(horaExtra.date, 'MMMM yyyy', '', 'es');
       if (mes) {
         if(!horasPorMesMap[mes]){
           horasPorMesMap[mes] = 0;

@@ -3,6 +3,7 @@
     height: 100vh;
     width: 100%;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 }
@@ -10,7 +11,7 @@
 .almacen{
     background-color: white;
     height: 400px;
-    width: 60%;
+    width: 30%;
 }
 
 .topbar{
@@ -25,4 +26,8 @@
 button.active{
     background-color: #007bff;
     color: white;
+}
+
+.botonAtras{
+    margin-top: 20px;
 }
