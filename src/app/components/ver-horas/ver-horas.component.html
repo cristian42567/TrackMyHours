@@ -6,15 +6,18 @@
                     <button class="botonTopBar" (click)="mostrarHorasTotales()"
                         [class.active]="vistaActual === 'totales'">Ver horas
                         totales</button>
-                    <button class="botonTopBar" (click)="mostrarHorasPorMes()" [class.active]="vistaActual === 'meses'">Ver
-                        horas por
-                        mes</button>
+                    <button class="botonTopBar" (click)="mostrarHorasPorMes()" [class.active]="vistaActual === 'meses'">Ver horas por mes</button>
                 </div>
                 <div>
                     <div class="formulario">
                         @if(vistaActual === 'totales') {
+                            <div>
+                                <p class="horasTotales">La suma total es de {{sumatotalHoras()}} horas.</p>
+                            </div>
                             @for (horasExtras of horasExtra; track $index) {
+                                
                                 @if(editandoId !== horasExtras.id) {
+                                    
                                     <p class="contenidoFrase">El día {{formatearFecha(horasExtras.date)}}, hice {{ horasExtras.horas }}
                                         horas, {{
                                         horasExtras.descripcion }}</p>
@@ -24,7 +27,7 @@
                                     </div>
                                 }
                                 @if(editandoId === horasExtras.id) {
-                                    <form (submit)="guardarHoras()" [formGroup]="editarForm">
+                                    <form class="formularioEditar" (submit)="guardarHoras()" [formGroup]="editarForm">
                                         <label for="date">Fecha:</label>
                                         <input type="date" id="date" formControlName="date">
 
@@ -39,20 +42,18 @@
                                     </form>
                                 }
                             }
-                            <div>
-                                <p>Suma total de todas las horas totales es de {{sumatotalHoras()}} horas.</p>
-                            </div>
                         }
                     </div>
 
                 </div>
-                <div class="formularioDos">
                     @if(vistaActual === 'meses') {
-                        @for (mes of horasPorMes; track $index) {
-                            <p>En el mes de {{mes.mes}}, hice {{mes.totalHoras}} horas.</p>
-                        }
+                        <div class="formularioDos">
+                            <p class="horasTotales">La suma total es de {{sumatotalHoras()}} horas.</p>
+                            @for (mes of horasPorMes; track $index) {
+                                <p class="fraseDelMes">En <span>{{mes.mes}}</span>, has hecho un total de <b>{{mes.totalHoras}}</b> horas.</p>
+                            }
+                        </div>
                     }
-                </div>
             }
     </div>
     <div class="botonAtras">
