@@ -98,3 +98,29 @@ form:focus{
 .botonLogin:hover{
     background-color: #2ddb2d;
 }
+
+/*Hago la página responsive*/
+
+@media screen and (max-width: 950px) {
+    .contenido{
+        gap: 10px;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .contenido{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .descripcion-logo{
+        margin-bottom: 50px;
+        text-align: center;
+    }
+
+    .contenedor-logo{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
